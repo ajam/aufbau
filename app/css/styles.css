@@ -4,21 +4,59 @@ body {
 	margin: 0;
 }
 
+html{
+	font-size: 16px;
+}
+
+body{
+	font-size: 62.5%;
+	font-family: 'Helvetica Neue', Helvetica, sans-serif;
+}
+
 header {
-	position: absolute;
-	width: 500px;
-	height: 250px;
-	top: 50%;
-	left: 50%;
-	margin-top: -125px;
-	margin-left: -250px;
+	width: 100%;
 	text-align: center;
+	padding: 10px 0;
 }
 
 header h1 {
-	font-family: 'Helvetica Neue', Helvetica, sans-serif;
-	font-size: 60px;
 	font-weight: 100;
-	margin: 0;
+	font-size: 3.5em;
+	margin: 10px 0 0 0;
 	padding: 0;
+}
+
+#main{
+	padding: 15px 25px 25px 25px;
+	text-align: center;
+	width: 75%;
+	margin: 0 auto;
+	overflow: auto;
+}
+
+.app-group{
+	width: 140px;
+	height: 160px;
+	display: inline-block;
+	margin: 0 auto;
+	padding: 12px 10px 12px 0;
+}
+.app-group:hover{
+	cursor: pointer;
+}
+.app-group:hover .app-icon{
+	background-color: #DDD;
+}
+.app-icon{
+	width: 100%;
+	height: 140px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	border-radius: 8px;
+}
+.app-name{
+	width: 100%;
+	text-align: center;
+	padding: 5px 0;
+	font-size: 1.4em;
 }

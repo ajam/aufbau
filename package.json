@@ -1,8 +1,8 @@
 {
   "name": "aufbau",
   "productName": "Aufbau",
-  "version": "0.0.0",
-  "description": "My fantastic app",
+  "version": "0.1.0",
+  "description": "A desktop app that loads a hand-curated, artisanal selection of local web apps.",
   "license": "MIT",
   "main": "index.js",
   "repository": "mhkeller/aufbau",
@@ -15,9 +15,9 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "init": "./init.js",
+    "init": "./init.js && bower install",
     "start": "electron .",
-    "build": "electron-packager . $npm_package_productName --out=dist --ignore=dist --prune --asar --all --version=0.30.0"
+    "build": "electron-packager . Aufbau --out=dist --ignore=dist --prune --asar --all --version=0.30.0"
   },
   "files": [
     "index.js",
