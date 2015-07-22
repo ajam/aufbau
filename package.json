@@ -15,9 +15,9 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "init": "./init.js && bower install",
+    "init": "./init.js",
     "start": "electron .",
-    "build": "electron-packager . Aufbau --out=dist --ignore=dist --prune --asar --all --version=0.30.0"
+    "build": "npm init && electron-packager . Aufbau --out=dist --ignore=dist --prune --asar --all --version=0.30.0"
   },
   "files": [
     "index.js",

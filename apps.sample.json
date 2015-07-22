@@ -3,6 +3,7 @@
 		"displayName": "Chartbuilder",
 		"packageName": "chartbuilder",
 		"indexPath": "build/index.html",
-		"build": "npm run build"
+		"buildCmd": "npm run build",
+		"icon": "chartbuilder.png"	
 	}
 ]

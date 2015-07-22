@@ -51,7 +51,7 @@ function installApp(appInfo, nextStep, cb) {
 
 function buildApp(appInfo, cb){
 	// Prep build command for `child.spawn`.
-	var parts = appInfo.build.split(/\s+/g)
+	var parts = appInfo.buildCmd.split(/\s+/g)
 	// Run build command
 	var buildProcess = child.spawn(parts[0], parts.slice(1), {stdio: 'inherit'})
 
