@@ -8,12 +8,11 @@ var io = require('indian-ocean'),
 		queue = require('queue-async');
 
 var aufbau_prefix = chalk.magenta('[Aufbau] ')
-
 var apps = io.readDataSync('./apps.json')
+
 // Install our apps serially (one after another)
 var q = queue(1)
 
-// TODO, convert to streaming output
 apps.forEach(function(appInfo){
 	if (appInfo.build) {
 		q.defer(initApp, appInfo)
@@ -76,7 +75,9 @@ function checkStatus(statusCode, appInfo, currentStepName, nextStep, cb){
 
 	// Log some white space here
 	console.log('')
+
 	if (statusCode != 0){
+
 		response_text += chalk.red.bold('Error '+currentStepName+'ing app:') + ' ' + chalk.white.bold(appInfo.packageName) 
 		if (currentStepName == 'build') {
 			response_text += ' with command `' + chalk.bold(appInfo.build) + '`'
@@ -85,9 +86,10 @@ function checkStatus(statusCode, appInfo, currentStepName, nextStep, cb){
 		console.log(response_text)
 		cb(response_text)
 	} else {
+
 		response_text += chalk.green.bold(current_step_past_tense+' app:') + ' ' + chalk.white.bold(appInfo.packageName)
-		
 		console.log(response_text)
+
 		if (nextStep){
 			console.log(aufbau_prefix + chalk.cyan('Building...'), chalk.white.bold(appInfo.packageName))
 			nextStep(appInfo, cb)
