@@ -1,0 +1,42 @@
+{
+  "name": "aufbau",
+  "productName": "Aufbau",
+  "version": "0.0.0",
+  "description": "My fantastic app",
+  "license": "MIT",
+  "main": "index.js",
+  "repository": "mhkeller/aufbau",
+  "author": {
+    "name": "mhkeller",
+    "email": "michael.keller@gmail.com",
+    "url": "github.com/mhkeller/aufbau"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "init": "./init.js",
+    "start": "electron .",
+    "build": "electron-packager . $npm_package_productName --out=dist --ignore=dist --prune --asar --all --version=0.30.0"
+  },
+  "files": [
+    "index.js",
+    "index.html",
+    "index.css"
+  ],
+  "keywords": [
+    "electron-app"
+  ],
+  "dependencies": {
+    "chalk": "^1.1.0",
+    "chartbuilder": "^2.0.0",
+    "electron-debug": "^0.1.1",
+    "indian-ocean": "^0.4.0",
+    "queue-async": "^1.0.7",
+    "shelljs": "^0.5.1"
+  },
+  "devDependencies": {
+    "electron-packager": "^5.0.0",
+    "electron-prebuilt": "^0.30.0"
+  }
+}

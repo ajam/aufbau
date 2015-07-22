@@ -1,0 +1,8 @@
+[
+	{
+		"displayName": "Chartbuilder",
+		"packageName": "chartbuilder",
+		"indexPath": "build/index.html",
+		"build": "npm run build"
+	}
+]
