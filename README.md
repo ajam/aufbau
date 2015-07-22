@@ -30,11 +30,23 @@ Currently, it only supports one build command. That is to say, you can't do some
 
 ### Development
 
-```
+```bash
 $ npm install
-$ npm init
 $ npm start
 ```
+
+### Initialize a new app
+
+After you've added a new app to `apps.json`, you run the following to include it as a part of the project.
+
+````bash
+$ npm run init-apps
+````
+
+This will run `npm install` and any specified build commands on those modules. `npm install` is required in case dev dependencies are required to build.
+
+**Note**: Once we figure out a way to do menus on a per-app basis, this process will change slightly
+
 
 ### Build the binaries
 

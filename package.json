@@ -15,7 +15,8 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "init": "./init.js",
+    "postinstall": "npm run init-apps",
+    "init-apps": "./init.js",
     "start": "electron .",
     "build": "npm init && electron-packager . Aufbau --out=dist --ignore=dist --prune --asar --all --version=0.30.0"
   },

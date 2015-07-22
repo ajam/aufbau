@@ -14,7 +14,7 @@ var apps = io.readDataSync('./apps.json')
 var q = queue(1)
 
 apps.forEach(function(appInfo){
-	if (appInfo.build) {
+	if (appInfo.buildCmd) {
 		q.defer(initApp, appInfo)
 	}
 });
@@ -22,13 +22,17 @@ apps.forEach(function(appInfo){
 q.awaitAll(function(err, results){
 	console.log('')
 	console.log(chalk.underline('Aufbau results'))
-	if (!err){
+	if (!err && results.length){
 		results.forEach(function(result){
 			console.log(result.replace(aufbau_prefix, ''))
 		})
 		console.log('')
 		console.log('Finished.')
+		console.log('')
 	} else {
+		if (!err) {
+			err = chalk.red('No apps found to init.')
+		}
 		console.log(err.replace(aufbau_prefix, ''));
 		console.log('')
 	}
