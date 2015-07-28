@@ -53,6 +53,7 @@ header h1 {
 	background-size: contain;
 	background-repeat: no-repeat;
 	border-radius: 8px;
+	background-image: url('./icons/default.png');
 }
 .app-name{
 	width: 100%;

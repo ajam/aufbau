@@ -1,6 +1,6 @@
 (function(){
 	var path = require('path')
-	var aufbau_root = path.resolve(__dirname, '..');
+	var aufbau_root = path.resolve(__dirname, '../');
 	
 	d3.json(path.join(aufbau_root, 'apps.json'), function(err, appsList){
 		bakeApps(appsList)
@@ -18,7 +18,9 @@
 		app_group.append('div')
 			.classed('app-icon', true)
 			.style('background-image', function(d){
-				return 'url(file://'+path.join(aufbau_root, 'icons', d.icon)+')'
+				// TODO, check if image file exists at module root
+				var icon_name = d.icon || 'default.png'
+				return 'url(file://'+path.join(aufbau_root, 'icons', icon_name)+')'
 			})
 
 		app_group.append('div')
