@@ -35,6 +35,7 @@ header h1 {
 }
 
 .app-group{
+	position: relative;
 	width: 140px;
 	height: 160px;
 	display: inline-block;
@@ -56,8 +57,11 @@ header h1 {
 	background-image: url('./icons/default.png');
 }
 .app-name{
+	position: absolute;
 	width: 100%;
 	text-align: center;
 	padding: 5px 0;
 	font-size: 1.4em;
+	bottom: 0;
+	transform: translateX(-5px);
 }
