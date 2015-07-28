@@ -35,18 +35,15 @@ $ npm install
 $ npm start
 ```
 
-### Initialize a new app
+### Build apps
 
-After you've added a new app to `apps.json`, you run the following to include it as a part of the project.
+After you've added a new app to `apps.json` that has a build process, run the following:
 
 ````bash
-$ npm run init-apps
+$ npm run build-apps
 ````
 
 This will run `npm install` and any specified build commands on those modules. `npm install` is required in case dev dependencies are required to build.
-
-**Note**: Once we figure out a way to do menus on a per-app basis, this process will change slightly
-
 
 ### Build the binaries
 

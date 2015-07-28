@@ -16,6 +16,8 @@ var q = queue(1)
 apps.forEach(function(appInfo){
 	if (appInfo.buildCmd) {
 		q.defer(initApp, appInfo)
+	} else {
+		console.log(aufbau_prefix + chalk.yellow('Skipping'), chalk.bold(appInfo.packageName) + chalk.yellow('. Has no build command.'))
 	}
 });
 
