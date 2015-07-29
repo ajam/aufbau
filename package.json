@@ -15,10 +15,11 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "postinstall": "npm run build-apps",
-    "build-apps": "./build.js",
     "start": "electron .",
-    "build": "npm init && electron-packager . Aufbau --out=dist --ignore=dist --prune --asar --all --version=0.30.0"
+    "build": "electron-packager . Aufbau --out=dist --ignore=dist --prune --asar --all --version=0.30.0",
+    "install-apps": "./install-apps.js",
+    "prebuild": "npm run install-apps",
+    "postinstall": "npm run install-apps"
   },
   "files": [
     "index.js",
@@ -30,9 +31,7 @@
   ],
   "dependencies": {
     "chalk": "^1.1.0",
-    "chartbuilder": "^2.0.0",
     "electron-debug": "^0.1.1",
-    "electron-menus": "^0.1.0",
     "indian-ocean": "^0.4.0",
     "queue-async": "^1.0.7",
     "shelljs": "^0.5.1"

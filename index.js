@@ -44,5 +44,11 @@ app.on('activate-with-no-open-windows', function () {
 });
 
 app.on('ready', function () {
+	var Menu = require('menu');
+	var MenuItem = require('menu-item');
+	var menu_template = require('./menus.js')
+	var menu = Menu.buildFromTemplate(menu_template);
+	Menu.setApplicationMenu(menu);
+
 	mainWindow = createMainWindow();
 });
