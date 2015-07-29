@@ -1,9 +1,18 @@
 [
-	{
-		"displayName": "Chartbuilder",
-		"packageName": "chartbuilder",
-		"indexPath": "build/index.html",
-		"buildCmd": "npm run build",
-		"icon": "chartbuilder.png"	
-	}
+  {
+    "displayName": "Chartbuilder",
+    "package": {
+      "chartbuilder": "^2.0.0"
+    },
+    "indexPath": "build/index.html",
+    "buildCmd": "npm run build",
+    "icon": "chartbuilder.png"
+  },{
+    "displayName": "Files",
+    "package": {
+      "aufbau-files": "mhkeller/aufbau-files"
+    },
+    "indexPath": "src/index.html",
+    "buildCmd": "npm run build"
+  }
 ]
