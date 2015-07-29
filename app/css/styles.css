@@ -51,7 +51,7 @@ header h1 {
 	cursor: pointer;
 }
 .app-group:hover .app-icon{
-	background-color: #DDD;
+	background-color: #D2CEB2;
 }
 .app-icon{
 	width: 100%;

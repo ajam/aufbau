@@ -16,7 +16,8 @@
   },
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . Aufbau --out=dist --ignore=dist --prune --asar --all --version=0.30.0",
+    "build": "electron-packager . Aufbau --out=dist --ignore=dist --asar --all --version=0.30.0 --overwrite",
+    "build-skip-install": "electron-packager . Aufbau --out=dist --ignore=dist --asar --all --version=0.30.0 --overwrite",
     "install-apps": "./install-apps.js",
     "prebuild": "npm run install-apps",
     "postinstall": "npm run install-apps"
@@ -31,6 +32,7 @@
   ],
   "dependencies": {
     "chalk": "^1.1.0",
+    "cheerio": "^0.19.0",
     "electron-debug": "^0.1.1",
     "indian-ocean": "^0.4.0",
     "queue-async": "^1.0.7",
