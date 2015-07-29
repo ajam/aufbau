@@ -6,17 +6,22 @@ body {
 
 html{
 	font-size: 16px;
+	height: 100%;
+	background-color: #f3f0df;
 }
 
 body{
 	font-size: 62.5%;
-	font-family: 'Helvetica Neue', Helvetica, sans-serif;
+	font-family: Helvetica, sans-serif;
 }
 
 header {
 	width: 100%;
 	text-align: center;
 	padding: 10px 0;
+	background-color: #394D4D;
+	color: #9BABAB;
+	text-shadow: 0 0 1px #0D0D0D;
 }
 
 header h1 {
