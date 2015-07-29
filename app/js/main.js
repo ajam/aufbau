@@ -22,11 +22,10 @@
 
 	function bakeApps(appsList){
 		var app_group = d3.select('#main').selectAll('.app-group').data(appsList).enter()
-			.append('div')
+			.append('a')
 			.classed('app-group', true)
-			.on('click', function(d){
-				window.location = 'file://'+path.join(aufbau_root, 'node_modules', getPackageName(d.package), d.indexPath)
-				return true;
+			.attr('href', function(d){
+				return path.join('node_modules', getPackageName(d.package), d.indexPath)
 			})
 
 		app_group.append('div')

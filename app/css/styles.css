@@ -46,6 +46,7 @@ header h1 {
 	display: inline-block;
 	margin: 0 auto;
 	padding: 12px 10px 12px 0;
+	color: #000;
 }
 .app-group:hover{
 	cursor: pointer;

@@ -16,8 +16,8 @@
   },
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . Aufbau --out=dist --ignore=dist --asar --all --version=0.30.0 --overwrite",
-    "build-skip-install": "electron-packager . Aufbau --out=dist --ignore=dist --prune --asar --all --version=0.30.0 --overwrite",
+    "build": "electron-packager . Aufbau --out=dist --ignore=dist --asar --platform=darwin --arch=x64 --version=0.30.0 --overwrite",
+    "build-skip-install": "electron-packager . Aufbau --out=dist --ignore=dist --asar --platform=darwin --arch=x64 --version=0.30.0 --overwrite",
     "install-apps": "./install-apps.js",
     "prebuild": "npm run install-apps",
     "postinstall": "npm run install-apps"

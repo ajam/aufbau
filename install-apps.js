@@ -15,6 +15,9 @@ var apps = io.readDataSync('./apps.json')
 // Install our apps serially (one after another)
 var q = queue(1)
 
+// Put them in our app folder
+shell.cd('./app')
+
 apps.forEach(function (appInfo) {
 	q.defer(initApp, appInfo)
 });
@@ -52,6 +55,7 @@ function initApp (appInfo, cb) {
 function installApp (appInfo, cb) {
 	var package_name = getPackageName(appInfo.package)
 	console.log(aufbau_prefix + chalk.cyan('Installing...') + ' ' + chalk.white.bold(package_name) + '\n')
+
 
 	var install_str = getPackageInstallStr(appInfo.package)
 	var installProcess = child.spawn('npm', ['install', install_str], {stdio: 'inherit'})
