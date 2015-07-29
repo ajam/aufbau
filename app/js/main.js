@@ -6,12 +6,16 @@
 		bakeApps(appsList)
 	})
 
+	function getPackageName(packageInfo){
+		return Object.keys(packageInfo)[0]
+	}
+
 	function bakeApps(appsList){
 		var app_group = d3.select('#main').selectAll('.app-group').data(appsList).enter()
 			.append('div')
 			.classed('app-group', true)
 			.on('click', function(d){
-				window.location = 'file://'+path.join(aufbau_root,'node_modules', d.packageName, d.indexPath)
+				window.location = 'file://'+path.join(aufbau_root,'node_modules', getPackageName(d.package), d.indexPath)
 				return true;
 			})
 
