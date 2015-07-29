@@ -1,7 +1,7 @@
 Aufbau
 ======
 
-> A desktop app that loads a hand-curated, artisanal selection of local web apps.
+> A desktop app to view and use a hand-curated, artisanal selection of local web apps.
 
 ![](assets/preview.png)
 
@@ -16,10 +16,10 @@ Change the name of `apps.sample.json` to `apps.json` and fill out the informatio
 ````js
 [
   {
-    "displayName": "Chartbuilder", // How you want it to display
     "package": {
       "chartbuilder": "^2.0.0" // Package name and version number, see below for projects that aren't on npm
     },
+    "displayName": "Chartbuilder", // How you want it to display
     "indexPath": "build/index.html", // The path to the `index.html` entry point for your app
     "buildCmd": "npm run build", // Optional, any additional build command 
     "icon": "chartbuilder.png" // Optional, specify an icon here and add it to the `icons/` folder if the app doesn't come with one.
@@ -34,10 +34,10 @@ You can also include private or public GitHub repos with the following syntax
 ````js
 [
   {
-    "displayName": "Files",
     "package": {
       "aufbau-files": "mhkeller/aufbau-files"
     },
+    "displayName": "Files",
     "indexPath": "src/index.html",
     "buildCmd": "npm run build"
   }

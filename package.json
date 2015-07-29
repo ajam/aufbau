@@ -1,8 +1,8 @@
 {
   "name": "aufbau",
   "productName": "Aufbau",
-  "version": "0.0.0",
-  "description": "My magnificent app",
+  "version": "0.1.0",
+  "description": "A desktop app to view and use a hand-curated, artisanal selection of local web apps",
   "license": "MIT",
   "main": "index.js",
   "repository": "mhkeller/aufbau",
@@ -16,7 +16,8 @@
   },
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . Aufbau --out=aufbau-dist --ignore=aufbau-dist --asar --platform=darwin --arch=x64 --version=0.30.1 --overwrite",
+    "build-skip-install": "electron-packager . Aufbau --out=aufbau-dist --ignore=aufbau-dist --asar --platform=darwin --arch=x64 --version=0.30.1 --overwrite",
+    "build": "npm run build-skip-install",
     "install-apps": "./install-apps.js",
     "postinstall": "npm run install-apps",
     "prebuild": "npm run install-apps"

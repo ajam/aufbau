@@ -34,7 +34,7 @@
 				var icon_path
 
 				if (!d.icon) {
-					icon_path = path.join(aufbau_root, 'node_modules', getPackageName(d.package), 'assets', 'icon.png')
+					icon_path = path.join('node_modules', getPackageName(d.package), 'assets', 'icon.png')
 					if (!existsSync(icon_path)) {
 						icon_path = path.join(aufbau_root, 'icons', 'default.png')
 					}
