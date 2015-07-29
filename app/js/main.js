@@ -1,6 +1,16 @@
 (function(){
 	var path = require('path')
+	var fs = require('fs')
 	var aufbau_root = path.resolve(__dirname, '../');
+
+	var existsSync = function (filename) {
+		try {
+			fs.accessSync(filename)
+			return true
+		} catch(ex) {
+			return false
+		}
+	}
 	
 	d3.json(path.join(aufbau_root, 'apps.json'), function(err, appsList){
 		bakeApps(appsList)
@@ -15,16 +25,25 @@
 			.append('div')
 			.classed('app-group', true)
 			.on('click', function(d){
-				window.location = 'file://'+path.join(aufbau_root,'node_modules', getPackageName(d.package), d.indexPath)
+				window.location = 'file://'+path.join(aufbau_root, 'node_modules', getPackageName(d.package), d.indexPath)
 				return true;
 			})
 
 		app_group.append('div')
 			.classed('app-icon', true)
 			.style('background-image', function(d){
-				// TODO, check if image file exists at module root
-				var icon_name = d.icon || 'default.png'
-				return 'url(file://'+path.join(aufbau_root, 'icons', icon_name)+')'
+				var icon_path
+
+				if (!d.icon) {
+					icon_path = path.join(aufbau_root, 'node_modules', getPackageName(d.package), 'assets', 'icon.png')
+					if (!existsSync(icon_path)) {
+						icon_path = path.join(aufbau_root, 'icons', 'default.png')
+					}
+				} else {
+					icon_path = path.join(aufbau_root, 'icons', d.icon)
+				}
+
+				return 'url(file://'+ icon_path+')'
 			})
 
 		app_group.append('div')
