@@ -105,11 +105,7 @@ function buildApp (appInfo, cb){
 
 function addHomeBtn (appInfo, cb){
 	var index_path = path.join(__dirname, 'app', 'index.html')
-	var home_markup = fs.readFileSync(path.join(__dirname, 'home-button.html'), 'utf-8').replace('{{index}}', 'file://' + index_path)
-
-	// // Get into this directory
-	// var package_name = getPackageName(appInfo.package)
-	// shell.cd(path.join('./node_modules', package_name))
+	var home_markup = fs.readFileSync(path.join(__dirname, 'home-btn.html'), 'utf-8').replace('{{index}}', 'file://' + index_path)
 
 	var index_path = './' + appInfo.indexPath
 
@@ -122,12 +118,23 @@ function addHomeBtn (appInfo, cb){
 		fs.writeFileSync(index_path, $.html(), 'utf-8')
 	}
 
-	// Go back to our main level
-	shell.cd('../../')
 
-	checkStatus(0, appInfo, 'add-home-btn', cb)
+	// checkStatus(0, appInfo, 'add-home-btn', cb)
+	checkStatus(0, appInfo, 'add-home-btn', {fn: pruneApp, name: 'prune'}, cb)
 
 }
+
+function pruneApp (appInfo, cb){
+
+	// Run build command
+	var pruneProcess = child.spawn('npm', ['prune', '--production'], {stdio: 'inherit'})
+
+	pruneProcess.on('close', function(statusCode) {
+		checkStatus(statusCode, appInfo, 'prune', cb)
+	});
+
+}
+
 
 function checkStatus (statusCode, appInfo, currentStepName, nextStep, cb) {
 	if (!cb){
@@ -153,6 +160,10 @@ function checkStatus (statusCode, appInfo, currentStepName, nextStep, cb) {
 		'add-home-btn': {
 			next: 'Adding home button',
 			done: 'Added home button'
+		},
+		'prune': {
+			next: 'Pruning',
+			done: 'Pruned'
 		}
 	}
 
@@ -184,6 +195,8 @@ function checkStatus (statusCode, appInfo, currentStepName, nextStep, cb) {
 			console.log(response_text)
 			nextStep.fn(appInfo, cb)
 		} else {
+			// Go back to our main level
+			shell.cd('../../')
 			cb(null, chalk.green.bold('Completed:') + ' ' + chalk.white.bold(package_name))
 		}
 
