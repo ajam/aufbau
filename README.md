@@ -3,7 +3,7 @@ Aufbau
 
 > A desktop app to view and use a hand-curated, artisanal selection of local web apps.
 
-![](assets/preview.png)
+![](assets/aufbau.gif)
 
 ## What's it for?
 
