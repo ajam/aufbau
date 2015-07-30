@@ -82,7 +82,7 @@ To see if that worked, now launch the desktop app preview with the following lik
 $ npm start
 ````
 
-#### Step 4: Building the desktop app + more customization
+#### Step 4: Building the desktop app
 
 If all that looks good, you'll want to bake out a desktop app for all to use! To do that, run the following, which will add the double-click desktop applications to the `aufbau-dist/` folder.
 
