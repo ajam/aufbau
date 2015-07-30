@@ -22,6 +22,9 @@ function createMainWindow () {
 	return win;
 }
 
+// Set the download directory to being off of the user's home folder
+app.setDataPath(app.getHomeDir())
+
 function onClosed() {
 	// deref the window
 	// for multiple windows store them in an array
