@@ -86,3 +86,5 @@ Add your application's icon in an `assets/` folder and name it `icon.png`. It sh
 ## License
 
 MIT © [mhkeller](http://github.com/mhkeller/aufbau)
+
+Cabin image by [Ana María Lora Macias](https://thenounproject.com/search/?q=log%20cabin&i=13415)
