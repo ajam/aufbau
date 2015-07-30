@@ -24,12 +24,12 @@ Add an object to this list for it to appear in your Aufbau dashboard. Here's a s
     "displayName": "Chartbuilder", // How you want it to display
     "indexPath": "build/index.html", // The path to the `index.html` entry point for your app
     "buildCmd": "npm run build", // Optional, any additional build command 
-    "icon": "chartbuilder.png" // Optional, specify an icon here and add it to the `icons/` folder if the app doesn't come with one.
+    "icon": "chartbuilder.png" // Optional, only needed if your app doesn't have its own icon in `icons/icon.png`. The icon specified here live in the aufbauf `icons/` folder.
   }
 ]
 ````
 
-**Note:** Only one build command is supported. That is to say, you can't do something like `gulp && npm run build`. If you have a command like that, simply make a new `script` command in you `package.json` that runs those two together.
+**Note:** Only one build command is supported. That is to say, you can't do something like `gulp && npm run build`. If you have a command like that, simply make a new `script` command in you `package.json` that runs those two together. If you're app is more complicated, see below.
 
 You can also include **private** or **public** GitHub repos with the following syntax:
 
@@ -47,6 +47,23 @@ You can also include **private** or **public** GitHub repos with the following s
 ````
 
 [Aufbau files](http://github.com/mhkeller/aufbau-files) is a simple modular for downloading files — useful for admin documents.
+
+##### Apps with more complicated build processes
+
+If you're app build process is more involved, maybe it's bilingual and needs a virtualenv for other dependencies, you can drop your app in the `www/node_modules/` folder and build it manually. The app still needs an `apps.json` definition and you can tell it to skip the installation processes by putting `skip-install` in lieu of the version number. When you run `npm run install-apps`, it will still add the home button, if that doesn't already exist.
+
+````js
+[
+  {
+    "package": {
+      "my-complex-app": "skip-install"
+    },
+    "displayName": "Web of intrigue",
+    "indexPath": "build/index.html",
+    "icon": "my-app-icon.png" // Only needed if not included in your app.
+  }
+]
+````
 
 ### Make your own version
 
@@ -70,9 +87,9 @@ Using the rubrique above, add your own app definitions to `apps.json`. When you'
 $ npm run install-apps
 ````
 
-This will install each app to the `app/node_modules` folder by running `npm install`. It will also execute any specified build commands specified in `apps.json`.
+This will install each app to the `www/node_modules` folder by running `npm install`. It will also execute any specified build commands specified in `apps.json`.
 
-**Note:** `npm run install-apps` is run after you run `npm install` on Aufbau (like we did above), or before any time you build out the desktop app with `npm run build` (covered in the steps below).
+**Note:** `npm run install-apps` is run after you run `npm install` on Aufbau (like we did above).
 
 #### Step 3: Testing locally
 

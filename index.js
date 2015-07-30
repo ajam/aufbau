@@ -16,7 +16,7 @@ function createMainWindow () {
 		title: 'Aufbau'
 	});
 
-	win.loadUrl(`file://${__dirname}/app/index.html`);
+	win.loadUrl(`file://${__dirname}/www/index.html`);
 	win.on('closed', onClosed);
 
 	return win;

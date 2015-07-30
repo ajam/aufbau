@@ -15,8 +15,8 @@ var apps = io.readDataSync('./apps.json')
 // Install our apps serially (one after another)
 var q = queue(1)
 
-// Put them in our app folder
-shell.cd('./app')
+// Put them in our www folder
+shell.cd('./www')
 
 apps.forEach(function (appInfo) {
 	q.defer(initApp, appInfo)
@@ -43,20 +43,34 @@ function getPackageName(packageInfo){
 
 function getPackageInstallStr(packageInfo){
 	var package_name = getPackageName(packageInfo)
-	var package_version = packageInfo[package_name];
-	return [package_name, package_version].join('@')
+	var package_version = packageInfo[package_name]
+	var result
+
+	if (package_version === 'skip-install') {
+		result = 'skip-install'
+	} else {
+		result = [package_name, package_version].join('@')
+	}
+	return result
 }
 
 function initApp (appInfo, cb) {
-	// Run `npm install` since if we have a build command, we should install all devDependencies that might not have been installed
-	installApp(appInfo, cb);
+	// The first step, install if it has a version number
+	// Otherwise, skip to adding the home button
+	var package_name = getPackageName(appInfo.package)
+	var install_string = getPackageInstallStr(appInfo.package)
+
+	if (install_string !== 'skip-install') {
+		console.log(aufbau_prefix + chalk.cyan('Installing...') + ' ' + chalk.white.bold(package_name) + '\n')
+		installApp(appInfo, cb)
+	} else {
+		console.log(aufbau_prefix + chalk.cyan('Skipping install. Adding home button only...') + ' ' + chalk.white.bold(package_name))
+		shell.cd(path.join('./node_modules', package_name))
+		addHomeBtn(appInfo, cb)
+	}
 }
 
 function installApp (appInfo, cb) {
-	var package_name = getPackageName(appInfo.package)
-	console.log(aufbau_prefix + chalk.cyan('Installing...') + ' ' + chalk.white.bold(package_name) + '\n')
-
-
 	var install_str = getPackageInstallStr(appInfo.package)
 	var installProcess = child.spawn('npm', ['install', install_str], {stdio: 'inherit'})
 
@@ -99,12 +113,13 @@ function buildApp (appInfo, cb){
 	var buildProcess = child.spawn(parts[0], parts.slice(1), {stdio: 'inherit'})
 
 	buildProcess.on('close', function(statusCode) {
-		checkStatus(statusCode, appInfo, 'build', {fn: addHomeBtn, name: 'add-home-btn'}, cb)
+		checkStatus(statusCode, appInfo, 'build', {fn: pruneApp, name: 'prune'}, cb)
+
 	});
 }
 
 function addHomeBtn (appInfo, cb){
-	var index_path = path.join(__dirname, 'app', 'index.html')
+	var index_path = path.join(__dirname, 'www', 'index.html')
 	var home_markup = fs.readFileSync(path.join(__dirname, 'home-btn.html'), 'utf-8').replace('{{index}}', 'file://' + index_path)
 
 	var index_path = './' + appInfo.indexPath
@@ -118,19 +133,16 @@ function addHomeBtn (appInfo, cb){
 		fs.writeFileSync(index_path, $.html(), 'utf-8')
 	}
 
-
-	// checkStatus(0, appInfo, 'add-home-btn', cb)
-	checkStatus(0, appInfo, 'add-home-btn', {fn: pruneApp, name: 'prune'}, cb)
+	checkStatus(0, appInfo, 'add-home-btn', cb)
 
 }
 
 function pruneApp (appInfo, cb){
-
-	// Run build command
+	// Run prune command
 	var pruneProcess = child.spawn('npm', ['prune', '--production'], {stdio: 'inherit'})
 
 	pruneProcess.on('close', function(statusCode) {
-		checkStatus(statusCode, appInfo, 'prune', cb)
+		checkStatus(statusCode, appInfo, 'prune', {fn: addHomeBtn, name: 'add-home-btn'}, cb)
 	});
 
 }
