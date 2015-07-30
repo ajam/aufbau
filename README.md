@@ -74,13 +74,15 @@ This will install each app to the `app/node_modules` folder by running `npm inst
 
 **Note:** `npm run install-apps` is run after you run `npm install` on Aufbau (like we did above), or before any time you build out the desktop app with `npm run build` (covered in the steps below).
 
+#### Step 3: Testing locally
+
 To see if that worked, now launch the desktop app preview with the following like we did before. Again, to exit, press <kbd>ctrl+c</kbd> in the console window or close the Electron app.
 
 ````
 $ npm start
 ````
 
-### Building the desktop app + more customization
+#### Step 4: Building the desktop app + more customization
 
 If all that looks good, you'll want to bake out a desktop app for all to use! To do that, run the following, which will add the double-click desktop applications to the `aufbau-dist/` folder.
 
@@ -89,6 +91,8 @@ $ npm run build
 ```
 
 This will build applications for OS X, Linux, and Windows, using [electron-packager](https://github.com/maxogden/electron-packager). 
+
+#### Bonus step: Customizing the name and icon
 
 If you'd like to change the name of the desktop app, change the [`productName`](/package.json#L3) in `package.json` as well as where you see `Aufbau` [right after](package.json#L19) `electron-packager` also in `package.json` near line 19. One last place is in [`index.js`](index.js#L16) near line 16 where it says `title`, which is what displays in the toolbar.
 
