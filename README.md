@@ -1,4 +1,4 @@
-![Aufbau](assets/banner.svg)
+![Aufbau](assets/banner.png)
 
 > A desktop app to view and use a hand-curated, artisanal selection of local web apps.
 
