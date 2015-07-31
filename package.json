@@ -5,11 +5,11 @@
   "description": "A desktop app to view and use a hand-curated, artisanal selection of local web apps",
   "license": "MIT",
   "main": "index.js",
-  "repository": "mhkeller/aufbau",
+  "repository": "ajam/aufbau",
   "author": {
-    "name": "mhkeller",
+    "name": "Michael Keller",
     "email": "michael.keller@gmail.com",
-    "url": "github.com/mhkeller/aufbau"
+    "url": "github.com/ajam/aufbau"
   },
   "engines": {
     "node": ">=0.10.0"
