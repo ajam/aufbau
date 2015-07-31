@@ -10,7 +10,7 @@ This project is a way to have a single desktop application that's the home for a
 
 ## Configuration
 
-Your installed apps are defined in an `apps.json` file. Rename `apps.sample.json` to `apps.json` to get started. 
+Your installed apps are defined in an `apps.json` file. Rename [`apps.sample.json`](apps.sample.json) to `apps.json` to get started. 
 
 Add an object to this list for it to appear in your Aufbau dashboard. Here's a sample json object for Chartbuilder
 
@@ -30,7 +30,7 @@ Add an object to this list for it to appear in your Aufbau dashboard. Here's a s
 
 **Note:** Only one build command is supported. That is to say, you can't do something like `gulp && npm run build`. If you have a command like that, simply make a new `script` command in you `package.json` that runs those two together. If you're app is more complicated, [see below](#apps-with-more-complicated-build-processes).
 
-You can also include **private** or **public** GitHub repos with the following syntax:
+You can also include **private** or **public** GitHub repos with the following `username/repo` syntax in the place of the version number:
 
 ````js
 [
@@ -45,7 +45,9 @@ You can also include **private** or **public** GitHub repos with the following s
 ]
 ````
 
-[Aufbau files](https://github.com/mhkeller/aufbau-files) is a simple modular for downloading files — useful for admin documents. See [Creating your own app moduels](#creating-aufbau-app-modules) for more information on that topic.
+[Aufbau files](https://github.com/mhkeller/aufbau-files) is a simple modular for downloading files — useful for admin documents.
+
+See [`apps.sample.json`](apps.sample.json) for a "putting it all together" example with these two apps.
 
 ##### Apps with more complicated build processes
 
