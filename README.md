@@ -10,7 +10,7 @@ This project is a way to have a single desktop application that's the home for a
 
 ## Configuration
 
-Your installed apps are defined in an `apps.json` file. Rename `apps.sample.json` to `apps.json` to get started. 
+Your installed apps are defined in an `apps.json` file. Rename [`apps.sample.json`](apps.sample.json) to `apps.json` to get started. 
 
 Add an object to this list for it to appear in your Aufbau dashboard. Here's a sample json object for Chartbuilder
 
@@ -28,9 +28,9 @@ Add an object to this list for it to appear in your Aufbau dashboard. Here's a s
 ]
 ````
 
-**Note:** Only one build command is supported. That is to say, you can't do something like `gulp && npm run build`. If you have a command like that, simply make a new `script` command in `package.json` that runs those two together. If your app is more complicated, see below.
+**Note:** Only one build command is supported. That is to say, you can't do something like `gulp && npm run build`. If you have a command like that, simply make a new `script` command in `package.json` that runs those two together. If your app is more complicated, [see below](#apps-with-more-complicated-build-processes).
 
-You can also include **private** or **public** GitHub repos with the following syntax:
+You can also include **private** or **public** GitHub repos with the following `username/repo` syntax in the place of the version number:
 
 ````js
 [
@@ -45,11 +45,15 @@ You can also include **private** or **public** GitHub repos with the following s
 ]
 ````
 
-[Aufbau files](http://github.com/mhkeller/aufbau-files) is a simple modular for downloading files — useful for admin documents.
+[Aufbau files](https://github.com/mhkeller/aufbau-files) is a simple modular for downloading files — useful for admin documents.
+
+See [`apps.sample.json`](apps.sample.json) for a "putting it all together" example with these two apps.
 
 ##### Apps with more complicated build processes
 
-If your app build process is more involved, maybe it's bilingual and needs a virtualenv for other dependencies, you can drop your app in the `www/node_modules/` folder and build it manually. The app still needs an `apps.json` definition and you can tell it to skip the installation processes by putting `skip-install` in lieu of the version number. When you run `npm run install-apps`, it will still add the home button, if that doesn't already exist.
+If your app build process is more involved, maybe it's bilingual and needs a virtualenv for other dependencies, you can drop your app in the `www/node_modules/` folder and build it manually however it wants to be built. 
+
+In your `apps.json` definition, tell Aufbau you've already done the heavy lifting by putting `skip-install` in lieu of the version number. Everything else can be the run the same way.
 
 ````js
 [
@@ -66,6 +70,16 @@ If your app build process is more involved, maybe it's bilingual and needs a vir
 
 ### Make your own version
 
+**tl;dr instructions**
+
+1. Add an app definition in `apps.json`.
+2. Run `npm run install-apps` to install.
+3. To test locally do `npm start` otherwise `npm run build` to bake the desktop applications for OS X, Windows and Linux.
+
+***
+
+**Full instructions**
+
 #### Step 1: Dry-run
 
 The first step toward customization is to add the apps you want to `apps.json`. The sample `apps.json` comes with two already, though, so just to make sure everything is working. Run the following:
@@ -74,25 +88,26 @@ The first step toward customization is to add the apps you want to `apps.json`. 
 $ npm install
 $ npm start
 ```
-That should launch a window with a simple two-app dashboard. To exit, press <kbd>ctrl+c</kbd> in the console window or close the Electron app.
 
-In your console output during installation, you'll have seen a bunch of information about installing apps, building apps, pruning apps and adding home buttons. We'll explain that in a little bit. In short, Aufbau is taking the app definitions in `apps.json`, downloading them and installing them into the desktop environment.
+That should launch a window with a simple two-app dashboard. To exit, press <kbd>ctrl</kbd> + <kbd>c</kbd> in the console window or close the Electron app.
+
+During installation, your console output will show a bunch of information about installing apps, building apps, pruning apps and adding home buttons. We'll explain that in a little bit. In short, Aufbau is taking the app definitions in `apps.json`, downloading them and installing them into the desktop environment.
 
 #### Step 2: Add your own apps
 
-Using the rubrique above, add your own app definitions to `apps.json`. When you're done, run the following:
+Using the rubrique above, add your own app definition(s) to `apps.json`. When you're done, run the following:
 
 ````bash
 $ npm run install-apps
 ````
 
-This will install each app to the `www/node_modules` folder by running `npm install`. It will also execute any specified build commands specified in `apps.json`.
+This will install each app to the `www/node_modules` folder by running `npm install`. It will also execute any specified build commands specified in `apps.json` and remove any apps not defined in `apps.json`.
 
-**Note:** `npm run install-apps` is run after you run `npm install` on Aufbau (like we did above).
+**Note:** `npm run install-apps` was already run during our dry run since it executes any time we do `npm install`, as a convenience.
 
 #### Step 3: Testing locally
 
-To see if that worked, now launch the desktop app preview with the following like we did before. Again, to exit, press <kbd>ctrl+c</kbd> in the console window or close the Electron app.
+To see if that worked, now launch the desktop app preview with the following like we did before. Again, to exit, press <kbd>ctrl</kbd> + <kbd>c</kbd> in the console window or close the Electron app.
 
 ````
 $ npm start
@@ -110,24 +125,28 @@ This will build applications for OS X, Linux, and Windows, using [electron-packa
 
 #### Bonus step: Customizing the name and icon
 
-If you'd like to change the name of the desktop app, change the [`productName`](/package.json#L3) in `package.json` as well as where you see `Aufbau` [right after](package.json#L19) `electron-packager` also in `package.json` near line 19. One last place is in [`index.js`](index.js#L16) near line 16 where it says `title`, which is what displays in the toolbar.
+If you'd like to change the name of the desktop app, you have three places 
 
-You can also change the icon by replacing the `main.icns` file in the `assets/` folder. The file must be in `icns` format. Here's a [handy converter](https://iconverticons.com/online/) if you have a `png` or other image format.
+* In [`package.json`](package.json) near line 3, change the [`productName`](/package.json#L3) to what you want.
+* In [`package.json`](package.json) near line 19 where you see `Aufbau` [right after](package.json#L19) `electron-packager`.
+* In [`index.js`](index.js#L16) near line 16 where it says `title`, which is what displays in the toolbar.
+
+To change, the icon replace the `main.icns` file in the `assets/` folder. The file must be in `icns` format. Here's a [handy converter](https://iconverticons.com/online/) if you have a `png` or other image format.
 
 ## Creating Aufbau app modules
 
-Check out [Aufbau files](http://github.com/mhkeller/aufbau-files) for a simple example. 
+See [aufbau-example-app](https://github.com/mhkeller/aufbau-example-app) for a starter example or [Aufbau files](http://github.com/mhkeller/aufbau-files) for a CommonJs example that uses the filesystem to load and save files. 
 
-The biggest difference between writing normal web apps is that your JavaScript is executed in a CommonJs environment, which means you can use node module syntax to delcare your dependencies, which gives read / write access to the filesystem. That is purely optional, however; you can write your modules just the same you would for any normal browser-based project.
+The biggest difference between writing normal web apps is that your JavaScript is executed in a CommonJs environment, which means you can use node module syntax to declare your dependencies and which gives read / write access to the filesystem. That is purely optional, however; you can write your modules just the same you would for any normal browser-based project.
 
-By default, the Aufbau install process adds [a home button link](/home-button.html) if one doesn't exist already. If you include an element with id `AUFBAU-home`, you can include your own markup and styles. If you just want to change the style, any CSS rules targeted to `#AUFBAU-home` will override existing styles, since default declarations are to the *class* `.AUFBAU-home`.
+By default, the Aufbau install process adds [a home button link](/home-button.html) if one doesn't exist already. If you want to change the style, any CSS rules targeting `#AUFBAU-home` will override existing styles. See [`home-btn.html`](home-btn.html) for an example.
 
 #### Setting your module's icon
 
 Your module's icon should be roughly 254x254 and you can put it in one of two places:
 
 1. It can be packaged with your app in the `icons/` folder and named `icon.png`.
-2. You can set a `icon` value in the module's `apps.json` delcaration and put a corresponding image in the `icons/` folder in Aufbau. This is how we do for Chartbuilder — it wasn't designed to be run in a desktop environment so it has no icon and we must declare it on Aufbau's end.
+2. You can set a `icon` value in the module's `apps.json` definition and put a corresponding image in the `icons/` folder in Aufbau. This is how we do for Chartbuilder — it wasn't designed to be run in a desktop environment so it has no icon and we must declare it on Aufbau's end.
 
 ## What's `Aufbau` mean?
 
