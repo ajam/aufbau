@@ -8,6 +8,8 @@
 
 This project is a way to have a single desktop application that's the home for all your tools. It's designed to be modular so that you can include simple web apps within this desktop interface, even if they were never designed for that context. Or, if you want to design one specifically for Aufbau, you can include that as well. 
 
+Try the [demo](https://github.com/ajam/aufbau/releases)!
+
 ## Configuration
 
 Your installed apps are defined in an `apps.json` file. Rename [`apps.sample.json`](apps.sample.json) to `apps.json` to get started. 
