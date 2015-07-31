@@ -74,15 +74,18 @@ In your `apps.json` definition, tell Aufbau you've already done the heavy liftin
 
 **tl;dr instructions**
 
-1. Add an app definition in `apps.json`.
-2. Run `npm run install-apps` to install.
-3. To test locally do `npm start` otherwise `npm run build` to bake the desktop applications for OS X, Windows and Linux.
+1. Fork this repo.
+2. Add an app definition in `apps.json`.
+3. Run `npm run install-apps` to install.
+4. To test locally do `npm start` otherwise `npm run build` to bake the desktop applications for OS X, Windows and Linux.
 
 ***
 
 **Full instructions**
 
 #### Step 1: Dry-run
+
+Begin by forking this repo.
 
 The first step toward customization is to add the apps you want to `apps.json`. The sample `apps.json` comes with two already, though, so just to make sure everything is working. Run the following:
 
