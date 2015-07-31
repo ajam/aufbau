@@ -45,7 +45,7 @@ You can also include **private** or **public** GitHub repos with the following s
 ]
 ````
 
-[Aufbau files](http://github.com/mhkeller/aufbau-files) is a simple modular for downloading files — useful for admin documents.
+[Aufbau files](https://github.com/mhkeller/aufbau-files) is a simple modular for downloading files — useful for admin documents. See [Creating your own app moduels](https://github.com/mhkeller/aufbau-example-app) for more information on that topic.
 
 ##### Apps with more complicated build processes
 
@@ -116,7 +116,7 @@ You can also change the icon by replacing the `main.icns` file in the `assets/` 
 
 ## Creating Aufbau app modules
 
-Check out [Aufbau files](http://github.com/mhkeller/aufbau-files) for a simple example. 
+See [aufbau-example-app](https://github.com/mhkeller/aufbau-example-app) for a starter example or [Aufbau files](http://github.com/mhkeller/aufbau-files) for a CommonJs example that uses the filesystem. 
 
 The biggest difference between writing normal web apps is that your JavaScript is executed in a CommonJs environment, which means you can use node module syntax to delcare your dependencies, which gives read / write access to the filesystem. That is purely optional, however; you can write your modules just the same you would for any normal browser-based project.
 
