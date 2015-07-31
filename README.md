@@ -79,7 +79,7 @@ $ npm install
 $ npm start
 ```
 
-That should launch a window with a simple two-app dashboard. To exit, press <kbd>ctrl+c</kbd> in the console window or close the Electron app.
+That should launch a window with a simple two-app dashboard. To exit, press <kbd>ctrl</kbd> + <kbd>c</kbd> in the console window or close the Electron app.
 
 During installation, your console output will show a bunch of information about installing apps, building apps, pruning apps and adding home buttons. We'll explain that in a little bit. In short, Aufbau is taking the app definitions in `apps.json`, downloading them and installing them into the desktop environment.
 
@@ -97,7 +97,7 @@ This will install each app to the `www/node_modules` folder by running `npm inst
 
 #### Step 3: Testing locally
 
-To see if that worked, now launch the desktop app preview with the following like we did before. Again, to exit, press <kbd>ctrl+c</kbd> in the console window or close the Electron app.
+To see if that worked, now launch the desktop app preview with the following like we did before. Again, to exit, press <kbd>ctrl</kbd> + <kbd>c</kbd> in the console window or close the Electron app.
 
 ````
 $ npm start
