@@ -6,7 +6,11 @@
 
 ## What's it for?
 
-This project is a way to have a single desktop application that's the home for all your tools. It's designed to be modular so that you can include simple web apps within this desktop interface, even if they were never designed for that context. Or, if you want to design one specifically for Aufbau, you can include that as well. 
+This project is a way to have a single desktop application that's the home for all your tools. It takes a web app that you've put on GitHub or npm, downloads it to a local folder and when you click on its icon, it takes you to the app. **It's kind of like an iframe but for making your app / tool work in on your desktop.**
+
+This can be useful for scenarios like having a bunch of newsrooms tools all in different places online that no one can remember the bookmarks to. With Aufbau, they could all live in the dock and (as soon as [this issue is kicked](https://github.com/ajam/aufbau/issues/3) auto-update with any additions. 
+
+It's designed to be modular so that you can include simple web apps within this desktop interface, even if they were never designed for that context. Or, if you want to design one specifically for Aufbau, you can include that as well. 
 
 Try the [demo](https://github.com/ajam/aufbau/releases)!
 
