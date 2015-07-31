@@ -28,7 +28,7 @@ Add an object to this list for it to appear in your Aufbau dashboard. Here's a s
 ]
 ````
 
-**Note:** Only one build command is supported. That is to say, you can't do something like `gulp && npm run build`. If you have a command like that, simply make a new `script` command in you `package.json` that runs those two together. If you're app is more complicated, see below.
+**Note:** Only one build command is supported. That is to say, you can't do something like `gulp && npm run build`. If you have a command like that, simply make a new `script` command in you `package.json` that runs those two together. If your app is more complicated, see below.
 
 You can also include **private** or **public** GitHub repos with the following syntax:
 
@@ -49,7 +49,7 @@ You can also include **private** or **public** GitHub repos with the following s
 
 ##### Apps with more complicated build processes
 
-If you're app build process is more involved, maybe it's bilingual and needs a virtualenv for other dependencies, you can drop your app in the `www/node_modules/` folder and build it manually. The app still needs an `apps.json` definition and you can tell it to skip the installation processes by putting `skip-install` in lieu of the version number. When you run `npm run install-apps`, it will still add the home button, if that doesn't already exist.
+If your app build process is more involved, maybe it's bilingual and needs a virtualenv for other dependencies, you can drop your app in the `www/node_modules/` folder and build it manually. The app still needs an `apps.json` definition and you can tell it to skip the installation processes by putting `skip-install` in lieu of the version number. When you run `npm run install-apps`, it will still add the home button, if that doesn't already exist.
 
 ````js
 [
