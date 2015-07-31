@@ -30,7 +30,7 @@ Add an object to this list for it to appear in your Aufbau dashboard. Here's a s
 
 **Note:** Only one build command is supported. That is to say, you can't do something like `gulp && npm run build`. If you have a command like that, simply make a new `script` command in `package.json` that runs those two together. If your app is more complicated, [see below](#apps-with-more-complicated-build-processes).
 
-You can also include **private** or **public** GitHub repos with the following `username/repo` syntax in the place of the version number:
+You can also include **private** or **public** GitHub repos with the following `username/reponame` syntax in the place of the version number:
 
 ````js
 [
@@ -44,10 +44,11 @@ You can also include **private** or **public** GitHub repos with the following `
   }
 ]
 ````
-
 [Aufbau files](https://github.com/mhkeller/aufbau-files) is a simple modular for downloading files — useful for admin documents.
 
-See [`apps.sample.json`](apps.sample.json) for a "putting it all together" example with these two apps.
+You can also specify a version number using a commmit sha or branch name after the `reponame` such as `mhkeller/aufbau-files#my-app-branch`. See the [npm documentation](https://docs.npmjs.com/files/package.json#git-urls-as-dependencies) for more details.
+
+View [`apps.sample.json`](apps.sample.json) for a "putting it all together" example with these two apps.
 
 ##### Apps with more complicated build processes
 
@@ -125,7 +126,7 @@ This will build applications for OS X, Linux, and Windows, using [electron-packa
 
 #### Bonus step: Customizing the name and icon
 
-If you'd like to change the name of the desktop app, you have three places 
+If you'd like to change the name of the desktop app, there are three places that need editing: 
 
 * In [`package.json`](package.json) near line 3, change the [`productName`](/package.json#L3) to what you want.
 * In [`package.json`](package.json) near line 19 where you see `Aufbau` [right after](package.json#L19) `electron-packager`.
@@ -137,7 +138,7 @@ To change, the icon replace the `main.icns` file in the `assets/` folder. The fi
 
 See [aufbau-example-app](https://github.com/mhkeller/aufbau-example-app) for a starter example or [Aufbau files](http://github.com/mhkeller/aufbau-files) for a CommonJs example that uses the filesystem to load and save files. 
 
-The biggest difference between writing normal web apps is that your JavaScript is executed in a CommonJs environment, which means you can use node module syntax to declare your dependencies and which gives read / write access to the filesystem. That is purely optional, however; you can write your modules just the same you would for any normal browser-based project.
+The biggest difference between writing normal web apps is that your JavaScript is executed in a CommonJs environment, which means you can use node module syntax to declare your dependencies and which gives read / write access to the filesystem. That is purely optional, however; you can write your modules the same you would for any normal browser-based project.
 
 By default, the Aufbau install process adds [a home button link](/home-button.html) if one doesn't exist already. If you want to change the style, any CSS rules targeting `#AUFBAU-home` will override existing styles. See [`home-btn.html`](home-btn.html) for an example.
 
