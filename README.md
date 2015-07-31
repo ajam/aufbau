@@ -12,7 +12,7 @@ This can be useful for scenarios like having a bunch of newsrooms tools all in d
 
 It's designed to be modular so that you can include simple web apps, even if they were never designed to live on the desktop. Or, if you want to design one specifically for Aufbau, you can do that as well. 
 
-**Try the [demo](https://github.com/ajam/aufbau/releases)!**
+_**Try the [demo](https://github.com/ajam/aufbau/releases)!**_
 
 ## Configuration
 
