@@ -36,7 +36,7 @@ You can also include **private** or **public** GitHub repos with the following `
 [
   {
     "package": {
-      "aufbau-files": "mhkeller/aufbau-files"
+      "aufbau-files": "ajam/aufbau-files"
     },
     "displayName": "Files",
     "indexPath": "src/index.html",
@@ -44,9 +44,10 @@ You can also include **private** or **public** GitHub repos with the following `
   }
 ]
 ````
-[Aufbau files](https://github.com/mhkeller/aufbau-files) is a simple modular for downloading files — useful for admin documents.
 
-You can also specify a version number using a commmit sha or branch name after the `reponame` such as `mhkeller/aufbau-files#my-app-branch`. See the [npm documentation](https://docs.npmjs.com/files/package.json#git-urls-as-dependencies) for more details.
+[Aufbau files](https://github.com/ajam/aufbau-files) is a simple modular for downloading files — useful for admin documents.
+
+You can also specify a version number using a commmit sha or branch name after the `reponame` such as `ajam/aufbau-files#my-app-branch`. See the [npm documentation](https://docs.npmjs.com/files/package.json#git-urls-as-dependencies) for more details.
 
 View [`apps.sample.json`](apps.sample.json) for a "putting it all together" example with these two apps.
 
@@ -136,7 +137,7 @@ To change, the icon replace the `main.icns` file in the `assets/` folder. The fi
 
 ## Creating Aufbau app modules
 
-See [aufbau-example-app](https://github.com/mhkeller/aufbau-example-app) for a starter example or [Aufbau files](http://github.com/mhkeller/aufbau-files) for a CommonJs example that uses the filesystem to load and save files. 
+See [aufbau-example-app](https://github.com/ajam/aufbau-example-app) for a starter example or [Aufbau files](http://github.com/ajam/aufbau-files) for a CommonJs example that uses the filesystem to load and save files. 
 
 The biggest difference between writing normal web apps is that your JavaScript is executed in a CommonJs environment, which means you can use node module syntax to declare your dependencies and which gives read / write access to the filesystem. That is purely optional, however; you can write your modules the same you would for any normal browser-based project.
 
@@ -155,6 +156,6 @@ Your module's icon should be roughly 254x254 and you can put it in one of two pl
 
 ## License
 
-MIT © [mhkeller](http://github.com/mhkeller/aufbau)
+MIT
 
 Cabin image by [Ana María Lora Macias](https://thenounproject.com/search/?q=log%20cabin&i=13415)

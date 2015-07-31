@@ -9,7 +9,7 @@
     "icon": "chartbuilder.png"
   },{
   	"package": {
-      "aufbau-files": "mhkeller/aufbau-files"
+      "aufbau-files": "ajam/aufbau-files"
     },
     "displayName": "Files",
     "indexPath": "src/index.html",
