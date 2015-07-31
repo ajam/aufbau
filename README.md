@@ -53,7 +53,7 @@ See [`apps.sample.json`](apps.sample.json) for a "putting it all together" examp
 
 If you're app build process is more involved, maybe it's bilingual and needs a virtualenv for other dependencies, you can drop your app in the `www/node_modules/` folder and build it manually however it wants to be built. 
 
-The app still needs an `apps.json` definition and you can tell aufbau that you've already done the heavy lifting by putting `skip-install` in lieu of the version number. When you run `npm run install-apps`, it will still add the home button, if that doesn't already exist.
+In your `apps.json` definition, tell Aufbau you've already done the heavy lifting by putting `skip-install` in lieu of the version number. When you run `npm run install-apps`, it will still add the home button, if that doesn't already exist.
 
 ````js
 [
@@ -91,7 +91,7 @@ Using the rubrique above, add your own app definition(s) to `apps.json`. When yo
 $ npm run install-apps
 ````
 
-This will install each app to the `www/node_modules` folder by running `npm install`. It will also execute any specified build commands specified in `apps.json`.
+This will install each app to the `www/node_modules` folder by running `npm install`. It will also execute any specified build commands specified in `apps.json` and remove any apps not defined in `apps.json`.
 
 **Note:** `npm run install-apps` was already run during our dry run since it executes any time we do `npm install`, as a convenience.
 
