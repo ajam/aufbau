@@ -22,24 +22,24 @@ shell.cd('./www')
 // Remove apps in the `www/node_modules/` folder that aren't in `apps.json`
 pruneAppModules(apps)
 
-// apps.forEach(function (appInfo) {
-// 	q.defer(initApp, appInfo)
-// });
+apps.forEach(function (appInfo) {
+	q.defer(initApp, appInfo)
+});
 
-// q.awaitAll(function (err, results) {
-// 	console.log(chalk.underline('\nAufbau results'))
-// 	if (!err && results.length){
-// 		results.forEach(function (result) {
-// 			console.log(result)
-// 		})
-// 		console.log('\nFinished.\n')
-// 	} else {
-// 		if (!err) {
-// 			err = chalk.red('No apps found to init.')
-// 		}
-// 		console.log(err.replace(aufbau_prefix, ''),'\n');
-// 	}
-// })
+q.awaitAll(function (err, results) {
+	console.log(chalk.underline('\nAufbau results'))
+	if (!err && results.length){
+		results.forEach(function (result) {
+			console.log(result)
+		})
+		console.log('\nFinished.\n')
+	} else {
+		if (!err) {
+			err = chalk.red('No apps found to init.')
+		}
+		console.log(err.replace(aufbau_prefix, ''),'\n');
+	}
+})
 
 function pruneAppModules (appModules) {
 	var active_apps = _.pluck(appModules, 'package').map(getPackageName)
