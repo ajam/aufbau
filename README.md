@@ -45,7 +45,7 @@ You can also include **private** or **public** GitHub repos with the following s
 ]
 ````
 
-[Aufbau files](https://github.com/mhkeller/aufbau-files) is a simple modular for downloading files — useful for admin documents. See [Creating your own app moduels](https://github.com/mhkeller/aufbau-example-app#creating-aufbau-app-modules) for more information on that topic.
+[Aufbau files](https://github.com/mhkeller/aufbau-files) is a simple modular for downloading files — useful for admin documents. See [Creating your own app moduels](#creating-aufbau-app-modules) for more information on that topic.
 
 ##### Apps with more complicated build processes
 
