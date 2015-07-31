@@ -8,6 +8,7 @@ var shell = require('shelljs')
 var queue = require('queue-async')
 var fs = require('fs')
 var cheerio = require('cheerio')
+var _ = require('underscore')
 
 var aufbau_prefix = chalk.magenta('[Aufbau] ')
 var apps = io.readDataSync('./apps.json')
@@ -17,6 +18,9 @@ var q = queue(1)
 
 // Put them in our www folder
 shell.cd('./www')
+
+// Remove apps in the `www/node_modules/` folder that aren't in `apps.json`
+pruneAppModules(apps)
 
 apps.forEach(function (appInfo) {
 	q.defer(initApp, appInfo)
@@ -36,6 +40,16 @@ q.awaitAll(function (err, results) {
 		console.log(err.replace(aufbau_prefix, ''),'\n');
 	}
 })
+
+function pruneAppModules (appModules) {
+	var active_apps = _.pluck(appModules, 'package').map(getPackageName)
+	var installed_apps = fs.readdirSync('./node_modules')
+	var old_apps = _.difference(installed_apps, active_apps)
+	old_apps.forEach(function(oldApp){
+		console.log(aufbau_prefix + chalk.cyan('Removing unused app...') + ' ' + chalk.white.bold(oldApp) + '\n')
+		shell.rm('-rf', path.join('node_modules', oldApp))
+	})
+}
 
 function getPackageName(packageInfo){
 	return Object.keys(packageInfo)[0]
