@@ -7,7 +7,8 @@
     "indexPath": "build/index.html",
     "buildCmd": "npm run build",
     "icon": "chartbuilder.png"
-  },{
+  },
+  {
     "package": {
       "aufbau-files": "ajam/aufbau-files"
     },
