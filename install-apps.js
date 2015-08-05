@@ -14,6 +14,7 @@ var aufbau_prefix = chalk.magenta('[Aufbau] ')
 var apps = io.readDataSync('./apps.json')
 
 // Install our apps serially (one after another)
+// TODO, this scrips should really function as a queue of queues so that the function logic flow is defined when things are added to the queue, as opposed to each function knowing what its next step should be
 var q = queue(1)
 
 // Put them in our www folder
@@ -65,6 +66,8 @@ function getPackageInstallStr(packageInfo){
 
 	if (package_version === 'skip-install') {
 		result = 'skip-install'
+	} else if (package_version === 'skip-all') {
+		result = 'skip-all'
 	} else {
 		result = [package_name, package_version].join('@')
 	}
@@ -77,13 +80,18 @@ function initApp (appInfo, cb) {
 	var package_name = getPackageName(appInfo.package)
 	var install_string = getPackageInstallStr(appInfo.package)
 
-	if (install_string !== 'skip-install') {
+	if (install_string !== 'skip-install' && install_string !== 'skip-all') {
 		console.log(aufbau_prefix + chalk.cyan('Installing...') + ' ' + chalk.white.bold(package_name) + '\n')
 		installApp(appInfo, cb)
-	} else {
+	} else if (install_string === 'skip-install'){
 		console.log(aufbau_prefix + chalk.cyan('Skipping install. Adding home button only...') + ' ' + chalk.white.bold(package_name))
 		shell.cd(path.join('./node_modules', package_name))
 		addHomeBtn(appInfo, cb)
+	} else if (install_string === 'skip-all'){
+		console.log(aufbau_prefix + chalk.cyan('Skipping all...') + ' ' + chalk.white.bold(package_name))
+		// Still cd into this package so that we end up in the expected place when we do the next app
+		shell.cd(path.join('./node_modules', package_name))
+		checkStatus(0, appInfo, 'skip-all', cb)
 	}
 }
 
@@ -193,6 +201,9 @@ function checkStatus (statusCode, appInfo, currentStepName, nextStep, cb) {
 		'prune': {
 			next: 'Pruning',
 			done: 'Pruned'
+		},
+		'skip-all': {
+			done: 'Skipped'
 		}
 	}
 

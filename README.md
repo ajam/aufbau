@@ -59,7 +59,7 @@ View [`apps.sample.json`](apps.sample.json) for a "putting it all together" exam
 
 ##### Apps with more complicated build processes
 
-If your app build process is more involved, maybe it's bilingual and needs a virtualenv for other dependencies, you can drop your app in the `www/node_modules/` folder and build it manually however it wants to be built. 
+Generally, you should be able to included even complicated build processes such as installing dependencies in a virtualenv in a shell script that is called by an npm "scripts" command. But if for whatever reason you prefer to build manually, you can drop your built app in the `www/node_modules/`. 
 
 In your `apps.json` definition, tell Aufbau you've already done the heavy lifting by putting `skip-install` in lieu of the version number. Everything else can be the run the same way.
 
