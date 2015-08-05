@@ -76,6 +76,10 @@ In your `apps.json` definition, tell Aufbau you've already done the heavy liftin
 ]
 ````
 
+##### Optional "Home" button
+
+As a part of the install process, Aufbau adds a "Go to home" button so that people can easily navigate from your app modules back to the main dashboard. If you'd like to avoid this, add `skipHomeBtn: true` in your app definition, or use `skip-all` in lieu of the version number, which will skip everything that `skip-install` does plus skip adding the home button.
+
 ### Make your own version
 
 **tl;dr instructions**

@@ -167,7 +167,12 @@ function pruneApp (appInfo, cb){
 	var pruneProcess = child.spawn('npm', ['prune', '--production'], {stdio: 'inherit'})
 
 	pruneProcess.on('close', function(statusCode) {
-		checkStatus(statusCode, appInfo, 'prune', {fn: addHomeBtn, name: 'add-home-btn'}, cb)
+		var next_step = null;
+		// Don't add the home button if we have set that in our app definition
+		if (!appInfo.skipHomeBtn) {
+			next_step = {fn: addHomeBtn, name: 'add-home-btn'};
+		}
+		checkStatus(statusCode, appInfo, 'prune', next_step, cb)
 	});
 
 }
