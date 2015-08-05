@@ -12,7 +12,7 @@ This can be useful for scenarios like having a bunch of newsrooms tools all in d
 
 It's designed to be modular so that you can include simple web apps, even if they were never designed to live on the desktop. Or, if you want to design one specifically for Aufbau, you can do that as well. 
 
-**Try the [demo](https://github.com/ajam/aufbau/releases)!**
+_**Try the [demo](https://github.com/ajam/aufbau/releases)!**_
 
 ## Configuration
 
@@ -166,6 +166,17 @@ Your module's icon should be roughly 254x254 and you can put it in one of two pl
 ## What's `Aufbau` mean?
 
 `Aufbau` means "to build up" in German. The [Aufbau principle](https://en.wikipedia.org/wiki/Aufbau_principle) is the process by which electrons fill orbital levels around an atom's nucleus. Because this app is about building a collection of [Electron](http://github.com/atom/electron) apps, it seemed appropriate.
+
+## Aufbau App Modules
+
+Here's an informal list of modules that have been used with Aufbau.
+
+* [Aufbau files](https://github.com/ajam/aufbau-files)
+* [Chartbuilder](https://github.com/quartz/chartbuilder)
+
+## Using Aufbau?
+
+[Let us know!](mailto:michael.keller@aljazeera.net)
 
 ## License
 
