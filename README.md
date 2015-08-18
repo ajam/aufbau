@@ -57,7 +57,7 @@ You can also specify a version number using a commmit sha or branch name after t
 
 View [`apps.sample.json`](apps.sample.json) for a "putting it all together" example with these two apps.
 
-##### Apps with more complicated build processes
+##### Skipping installation
 
 Generally, you should be able to included even complicated build processes such as installing dependencies in a virtualenv in a shell script that is called by an npm "scripts" command. But if for whatever reason you prefer to build manually, you can drop your built app in the `www/node_modules/`. 
 
@@ -75,10 +75,6 @@ In your `apps.json` definition, tell Aufbau you've already done the heavy liftin
   }
 ]
 ````
-
-##### Optional "Home" button
-
-As a part of the install process, Aufbau adds a "Go to home" button so that people can easily navigate from your app modules back to the main dashboard. If you'd like to avoid this, add `skipHomeBtn: true` in your app definition, or use `skip-all` in lieu of the version number, which will skip everything that `skip-install` does plus skip adding the home button.
 
 ### Make your own version
 
@@ -106,7 +102,7 @@ $ npm start
 
 That should launch a window with a simple two-app dashboard. To exit, press <kbd>ctrl</kbd> + <kbd>c</kbd> in the console window or close the Electron app.
 
-During installation, your console output will show a bunch of information about installing apps, building apps, pruning apps and adding home buttons. We'll explain that in a little bit. In short, Aufbau is taking the app definitions in `apps.json`, downloading them and installing them into the desktop environment.
+During installation, your console output will show a bunch of information about installing apps, building apps, and pruning app dependencies. In short, Aufbau is taking the app definitions in `apps.json`, downloading them and installing them into the desktop environment.
 
 #### Step 2: Add your own apps
 
@@ -154,7 +150,7 @@ See [aufbau-example-app](https://github.com/ajam/aufbau-example-app) for a start
 
 The biggest difference between writing normal web apps is that your JavaScript is executed in a CommonJs environment, which means you can use node module syntax to declare your dependencies and which gives read / write access to the filesystem. That is purely optional, however; you can write your modules the same you would for any normal browser-based project.
 
-By default, the Aufbau install process adds [a home button link](/home-button.html) if one doesn't exist already. If you want to change the style, any CSS rules targeting `#AUFBAU-home` will override existing styles. See [`home-btn.html`](home-btn.html) for an example.
+By default, Aufbau dynamically injects adds [a home button link](/home-button.html) if one doesn't exist already. If you want to change the style, any CSS rules targeting `#AUFBAU-home` will override existing class styles. See [`home-btn.css`](home-btn.css) for current styling.
 
 #### Setting your module's icon
 

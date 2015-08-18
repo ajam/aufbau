@@ -43,8 +43,6 @@ helpers.getPackageInstallStr = function(packageInfo){
 
 	if (package_version === 'skip-install') {
 		result = 'skip-install'
-	} else if (package_version === 'skip-all') {
-		result = 'skip-all'
 	} else {
 		result = [package_name, package_version].join('@')
 	}
@@ -63,10 +61,7 @@ steps.installApp = function (appInfo, cb) {
 			name: 'dev-install'
 		}
 	} else {
-		next_step = {
-			fn: steps.addHomeBtn,
-			name: 'add-home-btn'
-		}
+		next_step = null
 	}
 
 	installProcess.on('close', function(statusCode) {
@@ -99,35 +94,12 @@ steps.buildApp = function (appInfo, cb){
 	});
 }
 
-steps.addHomeBtn = function (appInfo, cb){
-	var index_path = path.join(__dirname, 'www', 'index.html')
-	var home_markup = fs.readFileSync(path.join(__dirname, 'home-btn.html'), 'utf-8').replace('{{index}}', 'file://' + index_path)
-
-	var index_path = './' + appInfo.indexPath
-
-	var $ = cheerio.load(fs.readFileSync(index_path, 'utf-8'))
-
-	var has_home_btn = $('#AUFBAU-home').length > 0
-
-	if (!has_home_btn) {
-		$('body').append(home_markup)
-		fs.writeFileSync(index_path, $.html(), 'utf-8')
-	}
-
-	checkStatus(0, appInfo, 'add-home-btn', cb)
-
-}
-
 steps.pruneApp = function (appInfo, cb){
 	// Run prune command
 	var pruneProcess = child.spawn('npm', ['prune', '--production'], {stdio: 'inherit'})
 
 	pruneProcess.on('close', function(statusCode) {
 		var next_step = null;
-		// Don't add the home button if we have set that in our app definition
-		if (!appInfo.skipHomeBtn) {
-			next_step = {fn: steps.addHomeBtn, name: 'add-home-btn'};
-		}
 		checkStatus(statusCode, appInfo, 'prune', next_step, cb)
 	});
 
@@ -155,22 +127,19 @@ function checkStatus (statusCode, appInfo, currentStepName, nextStep, cb) {
 			next: 'Building',
 			done: 'Built'
 		},
-		'add-home-btn': {
-			next: 'Adding home button',
-			done: 'Added home button'
-		},
 		'prune': {
 			next: 'Pruning',
 			done: 'Pruned'
 		},
-		'skip-all': {
-			done: 'Skipped'
+		'skip-install': {
+			done: 'Skipped install'
 		}
 	}
 
 	var current_step_strings = step_strings[currentStepName]
 	var response_text = aufbau_prefix
-	var next_step_string;
+	var next_step_string
+	var completed_string
 
 	// Log a line break here
 	console.log('\n')
@@ -198,37 +167,31 @@ function checkStatus (statusCode, appInfo, currentStepName, nextStep, cb) {
 		} else {
 			// Go back to our main level
 			shell.cd('../../')
-			cb(null, chalk.green.bold('Completed:') + ' ' + chalk.white.bold(package_name))
+			completed_string = (current_step_strings.done == 'Pruned') ? 'Built' : current_step_strings.done
+			cb(null, chalk.green.bold(completed_string + ':') + ' ' + chalk.white.bold(package_name))
 		}
 
 	}
 }
 
 // Install if it has a version number
-// Otherwise, skip to adding the home button
+// Otherwise, you're done
 function initApp (appInfo, cb) {
 	var package_name = helpers.getPackageName(appInfo.package)
 	var install_string = helpers.getPackageInstallStr(appInfo.package)
 
 	// Proceed normally if we don't have these flags
-	if (install_string !== 'skip-install' && install_string !== 'skip-all') {
-		reportStatus('Installing...', package_name)
-		
-		steps.installApp(appInfo, cb)
-	
-	} else if (install_string === 'skip-install'){
-		reportStatus('Skipping install. Adding home button only...', package_name)
-		
-		shell.cd(path.join('./node_modules', package_name))
-		steps.addHomeBtn(appInfo, cb)
-	
-	} else if (install_string === 'skip-all'){
-		reportStatus('Skipping all...', package_name)
+	if (install_string === 'skip-install'){
+		reportStatus('Skipping...', package_name)
 
 		// Still `cd` into this package so that we end up in the expected place when we do the next app
 		shell.cd(path.join('./node_modules', package_name))
 		// But jump to the last step
-		checkStatus(0, appInfo, 'skip-all', cb)
+		checkStatus(0, appInfo, 'skip-install', cb)
+	} else {
+		reportStatus('Installing...', package_name)
+		
+		steps.installApp(appInfo, cb)
 	}
 
 	function reportStatus(msg, pkg){
@@ -246,14 +209,13 @@ helpers.pruneAppModules(apps)
 var q = queue(1)
 
 // For each app, run through the steps
-// Note: Some of these steps can be skipped by adding commands for the app's version number. See README.md for more details
+// Note: Installation can be skipped by adding `skip-install` to the app's version number. See README.md for more details
 /* The steps are as follows:
  *
  * 1. Install the app
  * 2a. If the app has a build command, install devDependencies
  * 2b. Build the app if it had a build command
  * 2c. Run `npm prune` on the app to unbuild its devDependencies
- * 3. Add the "Home" button by inserting HTML into the main html file, as described in the app definition under `indexPath`
  */
 apps.forEach(function (appInfo) {
 	q.defer(initApp, appInfo)
