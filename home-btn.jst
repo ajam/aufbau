@@ -1,0 +1,7 @@
+var btn_hml = '<span>&#8592;</span>Home'
+var AUFBAU_a_tag = document.createElement('a')
+AUFBAU_a_tag.setAttribute('id', 'AUFBAU-home')
+AUFBAU_a_tag.setAttribute('class', 'AUFBAU-home')
+AUFBAU_a_tag.setAttribute('href', 'file://{{index_path}}')
+AUFBAU_a_tag.innerHTML= btn_hml
+document.getElementsByTagName('body')[0].appendChild(AUFBAU_a_tag);
