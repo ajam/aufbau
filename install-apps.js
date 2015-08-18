@@ -41,7 +41,7 @@ helpers.getPackageInstallStr = function(packageInfo){
 	var package_version = packageInfo[package_name]
 	var result
 
-	if (package_version === 'skip-install') {
+	if (package_version === 'skip-install' || package_version === 'external') {
 		result = 'skip-install'
 	} else {
 		result = [package_name, package_version].join('@')

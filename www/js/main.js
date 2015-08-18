@@ -20,12 +20,24 @@
 		return Object.keys(packageInfo)[0]
 	}
 
+	function getPackageVersion(packageInfo){
+		var package_name = getPackageName(packageInfo)
+		return packageInfo[package_name]
+	}
+
 	function bakeApps(appsList){
 		var app_group = d3.select('#main').selectAll('.app-group').data(appsList).enter()
 			.append('a')
 			.classed('app-group', true)
 			.attr('href', function(d){
-				return path.join('node_modules', getPackageName(d.package), d.indexPath)
+				var pkg_version = getPackageVersion(d.package)
+				var href
+				if (pkg_version === 'external') {
+					href = d.indexPath
+				} else {
+					href = path.join('node_modules', getPackageName(d.package), d.indexPath)
+				}
+				return href
 			})
 
 		app_group.append('div')
