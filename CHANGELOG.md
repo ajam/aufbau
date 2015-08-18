@@ -4,7 +4,7 @@ Changelog
 ## 0.3.0
 
 * Remove home button addition from install script
-  * Commit: https://github.com/ajam/aufbau/issues/11
+  * Commit: https://github.com/ajam/aufbau/commit/4ff9badef961fa6aac7b2c58bc792f0a24fbca6b
   * Closes: https://github.com/ajam/aufbau/issues/11
 * Refactored install script, added more comments, 
   * Commit: https://github.com/ajam/aufbau/commit/4714c108571d94567cf9c72bb2accefe7f7e70c3,
