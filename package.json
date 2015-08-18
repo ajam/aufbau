@@ -1,7 +1,7 @@
 {
   "name": "aufbau",
   "productName": "Aufbau",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A desktop app to view and use a hand-curated, artisanal selection of local web apps",
   "license": "MIT",
   "main": "index.js",
