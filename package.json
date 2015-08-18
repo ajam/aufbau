@@ -16,7 +16,7 @@
   },
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . Aufbau --out=aufbau-dist --ignore=aufbau-dist --asar --all --version=0.30.1 --overwrite --icon=assets/main.icns",
+    "build": "electron-packager . Aufbau --out=aufbau-dist --ignore=aufbau-dist --asar --all --version=0.30.4 --overwrite --icon=assets/main.icns",
     "install-apps": "./install-apps.js",
     "postinstall": "npm run install-apps"
   },
@@ -34,6 +34,6 @@
   },
   "devDependencies": {
     "electron-packager": "^5.0.0",
-    "electron-prebuilt": "^0.30.0"
+    "electron-prebuilt": "^0.30.4"
   }
 }

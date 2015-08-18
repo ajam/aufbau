@@ -1,6 +1,7 @@
 'use strict';
 const app = require('app');
 const BrowserWindow = require('browser-window');
+const path = require('path')
 
 // report crashes to the Electron project
 require('crash-reporter').start();
@@ -16,14 +17,15 @@ function createMainWindow () {
 		title: 'Aufbau'
 	});
 
+	// Set the download directory to being off of the user's home folder
+	var tilde_downloads = path.join(app.getHomeDir(), 'Downloads')
+	win.webContents.session.setDownloadPath(tilde_downloads)
+
 	win.loadUrl(`file://${__dirname}/www/index.html`);
 	win.on('closed', onClosed);
 
 	return win;
 }
-
-// Set the download directory to being off of the user's home folder
-app.setDataPath(app.getHomeDir())
 
 function onClosed() {
 	// deref the window
