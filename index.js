@@ -34,7 +34,7 @@ function createMainWindow () {
 		var index_path
 		var home_btn_css
 		var home_btn_js
-		if (page_title != options.page_title) {
+		if (page_title != 'index.html') {
 			// Add css
 			home_btn_css = fs.readFileSync(path.join(__dirname, 'home-btn.css'), 'utf-8')
 			webContents.sender.insertCSS(home_btn_css)
