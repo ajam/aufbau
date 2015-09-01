@@ -3,6 +3,7 @@ const app = require('app');
 const BrowserWindow = require('browser-window');
 const path = require('path')
 const fs = require('fs')
+const ipc = require('ipc')
 
 // report crashes to the Electron project
 require('crash-reporter').start();
@@ -27,8 +28,14 @@ function createMainWindow () {
 	var tilde_downloads = path.join(app.getHomeDir(), 'Downloads')
 	win.webContents.session.setDownloadPath(tilde_downloads)
 
-	// Whenever we finish loading a page, inject some javascript into it to add our back button
-	// Don't do this if we're on the main page, though
+	// console.log(win.webContents)
+
+	// Send the location of the user data folder to the client
+	ipc.on('synchronous-message', function(event, arg) {
+		console.log(arg);  // prints 'userData'
+		event.returnValue = app.getPath(arg)
+	});
+
 	win.webContents.on('did-finish-load', function (webContents) {
 		var page_title = webContents.sender.getTitle()
 		var index_path
@@ -43,6 +50,7 @@ function createMainWindow () {
 			index_path = path.join(__dirname, 'www', 'index.html')
 			home_btn_js = fs.readFileSync(path.join(__dirname, 'home-btn.jst'), 'utf-8').replace('{{index_path}}', index_path)
 			webContents.sender.executeJavaScript(home_btn_js)
+
 		}
 	})
 
@@ -62,9 +70,7 @@ function onClosed() {
 let mainWindow;
 
 app.on('window-all-closed', function () {
-	if (process.platform !== 'darwin') {
-		app.quit();
-	}
+	app.quit();
 });
 
 app.on('activate-with-no-open-windows', function () {
