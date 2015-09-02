@@ -28,11 +28,8 @@ function createMainWindow () {
 	var tilde_downloads = path.join(app.getHomeDir(), 'Downloads')
 	win.webContents.session.setDownloadPath(tilde_downloads)
 
-	// console.log(win.webContents)
-
 	// Send the location of the user data folder to the client
 	ipc.on('synchronous-message', function(event, arg) {
-		console.log(arg);  // prints 'userData'
 		event.returnValue = app.getPath(arg)
 	});
 
