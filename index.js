@@ -1,14 +1,14 @@
-'use strict';
-const app = require('app');
-const BrowserWindow = require('browser-window');
+'use strict'
+const app = require('app')
+const BrowserWindow = require('browser-window')
 const path = require('path')
 const fs = require('fs')
 
 // report crashes to the Electron project
-require('crash-reporter').start();
+require('crash-reporter').start()
 
 // adds debug features like hotkeys for triggering dev tools and reload
-require('electron-debug')();
+require('electron-debug')()
 
 // WHITELABELING OPTIONS
 var options = {
@@ -21,7 +21,7 @@ function createMainWindow () {
 		height: 768,
 		resizable: true,
 		title: options.page_title
-	});
+	})
 
 	// Set the download directory to being off of the user's home folder
 	var tilde_downloads = path.join(app.getHomeDir(), 'Downloads')
@@ -46,38 +46,38 @@ function createMainWindow () {
 		}
 	})
 
-	win.loadUrl(`file://${__dirname}/www/index.html`);
-	win.on('closed', onClosed);
+	win.loadUrl(`file://${__dirname}/www/index.html`)
+	win.on('closed', onClosed)
 
-	return win;
+	return win
 }
 
 function onClosed() {
 	// deref the window
 	// for multiple windows store them in an array
-	mainWindow = null;
+	mainWindow = null
 }
 
 // prevent window being GC'd
-let mainWindow;
+let mainWindow
 
 app.on('window-all-closed', function () {
 	if (process.platform !== 'darwin') {
-		app.quit();
+		app.quit()
 	}
-});
+})
 
 app.on('activate-with-no-open-windows', function () {
 	if (!mainWindow) {
-		mainWindow = createMainWindow();
+		mainWindow = createMainWindow()
 	}
-});
+})
 
 app.on('ready', function () {
-	var Menu = require('menu');
+	var Menu = require('menu')
 	var menu_template = require('./menus.js')(BrowserWindow)
-	var menu = Menu.buildFromTemplate(menu_template);
-	Menu.setApplicationMenu(menu);
+	var menu = Menu.buildFromTemplate(menu_template)
+	Menu.setApplicationMenu(menu)
 
-	mainWindow = createMainWindow();
-});
+	mainWindow = createMainWindow()
+})
