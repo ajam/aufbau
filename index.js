@@ -3,6 +3,7 @@ const app = require('app')
 const BrowserWindow = require('browser-window')
 const path = require('path')
 const fs = require('fs')
+const ipc = require('ipc')
 
 // report crashes to the Electron project
 require('crash-reporter').start()
@@ -14,6 +15,22 @@ require('electron-debug')()
 var options = {
 	page_title: 'Aufbau' // What do you want to display in the menu bar?
 }
+
+// Return requested path location
+function sendPath (mode) {
+	function (event, arg) {
+		var path = app.getPath(arg)
+		if (mode == 'async') {
+		  event.sender.send('asynchronous-reply', path)
+		} else if (mode == 'sync') {
+			event.returnValue = path
+		}
+	}
+}
+
+// Allow for messages to be sent from client
+ipc.on('asynchronous-message', sendPath('async'))
+ipc.on('synchronous-message', sendPath('sync'))
 
 function createMainWindow () {
 	const win = new BrowserWindow({
