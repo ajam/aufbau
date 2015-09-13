@@ -34,7 +34,7 @@ Add an object to this list for it to appear in your Aufbau dashboard. Here's a s
 ]
 ````
 
-**Note:** Only one build command is supported. That is to say, you can't do something like `gulp && npm run build`. If you have a command like that, simply make a new `script` command in `package.json` that runs those two together. If your app is more complicated, [see below](#apps-with-more-complicated-build-processes).
+**Note:** Only one build command is supported. That is to say, you can't do something like `gulp && npm run build`. If you have a command like that, simply make a new `script` command in `package.json` that runs those two together or points to a shell script that contains your build steps.
 
 You can also include **private** or **public** GitHub repos with the following `username/reponame` syntax in the place of the version number:
 
