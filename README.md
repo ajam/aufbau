@@ -148,7 +148,64 @@ To change, the icon replace the `main.icns` file in the `assets/` folder. The fi
 
 See [aufbau-example-app](https://github.com/ajam/aufbau-example-app) for a starter example or [Aufbau files](http://github.com/ajam/aufbau-files) for a CommonJs example that uses the filesystem to load and save files. 
 
-The biggest difference between writing normal web apps is that your JavaScript is executed in a CommonJs environment, which means you can use node module syntax to declare your dependencies and which gives read / write access to the filesystem. That is purely optional, however; you can write your modules the same you would for any normal browser-based project.
+The biggest difference between writing normal web apps is that your JavaScript is executed in a CommonJs environment. In other words, you can write NodeJS-style code to declare dependencies and you also have access to the file system to read and write files. If you use Browserify, you can think of it as using Browserify but without actually having to compile to a browser-friendly version.
+
+You still include your JavaScript file in the same way with a `<script src="path/to/main.js"></script>` in your `index.html` file. That being said, you don't **have** to write your apps in any style other than you normally write your JavaScript and HTML for the browser. You do need to, however, if you're doing any of the following:
+
+#### Reading and writing from the file system
+
+As mentioned above, if you're app is meant to read and write files, you can use the NodeJS `fs` module to do so. Because this is a Node module, you'll write your code like so:
+
+```js
+var fs = require('fs')
+
+var data = fs.readFileSync('path/to/data.json')
+```
+
+That should look familiar if you've worked in NodeJS before. If not, welcome to Node world!
+
+#### Storing user data
+
+One of the really cool things about Electron is the ability to store, say, a preferences list. Aufbau Files stores a list of server locations that users might want to load files from. You could also think of an app that's a simple wrapper around multiple Dropbox accounts. The app module would need to store that preference list somewhere. **Importantly**, you shouldn't be storing those preferences inside Aufbau itself because that data will be lost when the user upgrades to a new version. Instead, they should be stored in the typical place application store user data — on OS X this is the `~/Library/Application Support` directory, for example. 
+
+If you don't know where each of those locations is for every operating system, no worries! You shouldn't have to! Electron handles this for you with the `app.getPath('userData')` call.
+
+To request this location from inside your app, Aufbau [is set up to listen for](index.js#L20) a request and will send back the full path. In your app, do the following:
+
+```js
+var ipc = require('ipc')
+var user_data_dir = ipc.sendSync('synchronous-message', 'userData')
+var your_apps_user_data_dir = path.join(user_data_dir, 'your-app-name')
+console.log(your_apps_user_data_dir) // 'Users/<the-username>/Library/Application Support/Aufbau/your-app-name'
+```
+
+You could also send this asynchronously:
+
+```js
+var ipc = require('ipc')
+var user_data_dir = ipc.sendSync('asynchronous-message', 'userData', function(userDataDir){
+  var your_apps_user_data_dir = path.join(userDataDir, 'your-app-name')
+  console.log(your_apps_user_data_dir) // 'Users/<the-username>/Library/Application Support/Aufbau/your-app-name'
+})
+```
+
+### Testing your modules locally
+
+The trickiness this CommonJS / Electron setup imposes, though, is that your module only works when called from within Electron, since your browser won't be able to interpret the CommonJS-ness or Electron-specific patterns like the `ipc` example above.
+
+To develop locally, you'll create an npm sym link from Aufbau to your module. It's not as scary as it sounds. Here are the steps:
+
+1. In your module, run `npm link`. This will tell your local npm that this module can be exposed to other local apps, without going through the Internet-connected npm registry.
+2. Clone Aufbau to your local system, create an `apps.json` file with just the information for your local module. You can put whatever you want for the version number, that field won't be used.
+3. `cd` into the `www` directory.
+4. Run `npm link <name-of-module-from-step-1`>. This will put an alias of your app module into `www/node_modules/`. Essentially, doing the work `npm run install-apps`.
+5. `cd` back down one level to the base Aufbau directory and run `npm start` to launch a local Aufbau version. You should see your module in the dashboard. Click it to launch!
+
+To recap: To test your module, create an alias to it in your `www/node_modules/` folder through `npm link`. It still needs a module definition in `apps.json` so that Aufbau knows to add it to its dashboard.
+
+If you make changes to your module, you don't need to run `npm start` again — you can simply refresh your app module page from within Aufbau to see changes!
+
+### Whitelabeling the "Back to home button"
 
 By default, Aufbau dynamically injects adds [a home button link](/home-button.html) if one doesn't exist already. If you want to change the style, any CSS rules targeting `#AUFBAU-home` will override existing class styles. See [`home-btn.css`](home-btn.css) for current styling.
 
