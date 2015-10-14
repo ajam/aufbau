@@ -18,7 +18,7 @@ var options = {
 
 // Return requested path location
 function sendPath (mode) {
-	function (event, arg) {
+	return function (event, arg) {
 		var path = app.getPath(arg)
 		if (mode == 'async') {
 		  event.sender.send('asynchronous-reply', path)
