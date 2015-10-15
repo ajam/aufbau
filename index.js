@@ -28,7 +28,6 @@ function sendPath (mode) {
 	}
 }
 
-
 function createMainWindow () {
 	const win = new BrowserWindow({
 		width: 1280,
