@@ -28,9 +28,6 @@ function sendPath (mode) {
 	}
 }
 
-// Allow for messages to be sent from client
-ipc.on('asynchronous-message', sendPath('async'))
-ipc.on('synchronous-message', sendPath('sync'))
 
 function createMainWindow () {
 	const win = new BrowserWindow({
@@ -44,10 +41,9 @@ function createMainWindow () {
 	var tilde_downloads = path.join(app.getHomeDir(), 'Downloads')
 	win.webContents.session.setDownloadPath(tilde_downloads)
 
-	// Send the location of the user data folder to the client
-	ipc.on('synchronous-message', function(event, arg) {
-		event.returnValue = app.getPath(arg)
-	});
+	// Allow for messages to be sent from client
+	ipc.on('asynchronous-message', sendPath('async'))
+	ipc.on('synchronous-message', sendPath('sync'))
 
 	win.webContents.on('did-finish-load', function (webContents) {
 		var page_title = webContents.sender.getTitle()
