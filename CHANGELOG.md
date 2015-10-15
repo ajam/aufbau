@@ -11,6 +11,8 @@ Changelog
   * Commit: [db11c92c16fce30463fc3d769df6985ece3fc539](https://github.com/ajam/aufbau/commit/db11c92c16fce30463fc3d769df6985ece3fc539)
 * Missing return statement bug fix
   * Commit: [dbc2f40b7e2ccb08d20ec66ed66f518db3c07c03](https://github.com/ajam/aufbau/commit/dbc2f40b7e2ccb08d20ec66ed66f518db3c07c03)
+* Remove dependencies on `indian-ocean` and `underscore` and ignore hidden files when unbuilding modules
+  * Commit: [caccee5708c7b20a728871fb8c2a4470539e9b2e](https://github.com/ajam/aufbau/commit/caccee5708c7b20a728871fb8c2a4470539e9b2e)
 
 ## 0.3.1
 
