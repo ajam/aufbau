@@ -13,6 +13,8 @@ Changelog
   * Commit: [dbc2f40b7e2ccb08d20ec66ed66f518db3c07c03](https://github.com/ajam/aufbau/commit/dbc2f40b7e2ccb08d20ec66ed66f518db3c07c03)
 * Remove dependencies on `indian-ocean` and `underscore` and ignore hidden files when unbuilding modules
   * Commit: [caccee5708c7b20a728871fb8c2a4470539e9b2e](https://github.com/ajam/aufbau/commit/caccee5708c7b20a728871fb8c2a4470539e9b2e)
+* Move ipc listeners to after window load
+  * Commit: [b2a5a64814585800bb814cce9b9a33caff1f172d](https://github.com/ajam/aufbau/commit/b2a5a64814585800bb814cce9b9a33caff1f172d)
 
 ## 0.3.1
 
