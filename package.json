@@ -25,12 +25,9 @@
   ],
   "dependencies": {
     "chalk": "^1.1.0",
-    "cheerio": "^0.19.0",
     "electron-debug": "^0.1.1",
-    "indian-ocean": "^0.5.0",
     "queue-async": "^1.0.7",
-    "shelljs": "^0.5.1",
-    "underscore": "^1.8.3"
+    "shelljs": "^0.5.1"
   },
   "devDependencies": {
     "electron-packager": "^5.0.0",

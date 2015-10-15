@@ -1,28 +1,36 @@
 #!/usr/bin/env node
 
-var io = require('indian-ocean')
+var fs = require('fs')
 var path = require('path')
 var chalk = require('chalk')
 var child = require('child_process')
 var shell = require('shelljs')
 var queue = require('queue-async')
-var fs = require('fs')
-var cheerio = require('cheerio')
-var _ = require('underscore')
 
 var aufbau_prefix = chalk.magenta('[Aufbau] ')
-var apps = io.readDataSync('./apps.json')
+var apps = JSON.parse(fs.readFileSync('./apps.json', 'utf-8'))
 
 var helpers = {}
 var steps = {}
 
+helpers.difference = function (a, b) {
+  return a.filter(function(i) {
+  	return b.indexOf(i) < 0
+  })
+}
+
 // Removes modules from the `www/node_module` folder that don't appear in the `apps.json` file
 helpers.pruneAppModules = function (appModules) {
-	var active_apps = _.pluck(appModules, 'package').map(helpers.getPackageName)
+	var active_apps = appModules.map(function(module){
+		return module.package
+	}).map(helpers.getPackageName)
 	// Put this in a try in case `./node_modules` doesn't exist
 	try {
-		var installed_apps = fs.readdirSync('./node_modules')
-		var old_apps = _.difference(installed_apps, active_apps)
+		var installed_apps = fs.readdirSync('./node_modules').filter(function(fileName){
+			// Ignore hidden files
+			return !/^\./.test(fileName)
+		})
+		var old_apps = helpers.difference(installed_apps, active_apps)
 		old_apps.forEach(function(oldApp){
 			console.log(aufbau_prefix + chalk.cyan('Removing unused app...') + ' ' + chalk.white.bold(oldApp) + '\n')
 			shell.rm('-rf', path.join('node_modules', oldApp))
