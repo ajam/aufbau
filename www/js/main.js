@@ -31,11 +31,14 @@
 		app_group.append('div')
 			.classed('app-icon', true)
 			.style('background-image', function(d){
+				var icon_path_module
 				var icon_path
 
 				if (!d.icon) {
-					icon_path = path.join('node_modules', getPackageName(d.package), 'icons', 'icon.png')
-					if (!existsSync(icon_path)) {
+					icon_path_module = path.join('www', 'node_modules', getPackageName(d.package), 'icons', 'icon.png')
+					if (existsSync(icon_path_module)) {
+						icon_path = path.join(aufbau_root, 'www', 'node_modules', getPackageName(d.package), 'icons', 'icon.png')
+					} else {
 						icon_path = path.join(aufbau_root, 'icons', 'default.png')
 					}
 				} else {
