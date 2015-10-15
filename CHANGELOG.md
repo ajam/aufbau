@@ -15,6 +15,8 @@ Changelog
   * Commit: [caccee5708c7b20a728871fb8c2a4470539e9b2e](https://github.com/ajam/aufbau/commit/caccee5708c7b20a728871fb8c2a4470539e9b2e)
 * Move ipc listeners to after window load
   * Commit: [b2a5a64814585800bb814cce9b9a33caff1f172d](https://github.com/ajam/aufbau/commit/b2a5a64814585800bb814cce9b9a33caff1f172d)
+* Support modular defined icons
+  * Commit: [05b8b251d7c5523df779a46c1f86f3b8abab68ae](https://github.com/ajam/aufbau/commit/05b8b251d7c5523df779a46c1f86f3b8abab68ae)
 
 ## 0.3.1
 
